@@ -3,67 +3,273 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hangout Invitation</title>
+  <title>Plan a Beautiful Hangout</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #f0f8ff;
-      color: #333;
-      padding: 20px;
-    }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      color: #1e90ff;
-    }
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 30px;
-    }
-    .button {
-      display: inline-block;
-      margin: 10px;
-      padding: 15px 30px;
-      font-size: 1rem;
-      color: #fff;
-      background-color: #1e90ff;
-      text-decoration: none;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-    }
-    .button:hover {
-      background-color: #4169e1;
-    }
-    .no-button {
-      background-color: #ff6347;
-    }
-    .no-button:hover {
-      background-color: #e63946;
-    }
-    #response {
-      margin-top: 30px;
-      font-size: 1.5rem;
-      color: #4caf50;
-      display: none;
-    }
+    font-family: 'Dancing Script', cursive;
+    font-style: bold;
+    text-align: center;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    background-image: url('sunflower.jpg'); /* Adjust this path */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  h1 {
+    font-size: 4rem;
+    margin-bottom: 10px;
+    color: #af1fb9;
+    font-weight: 600;
+  }
+  p {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #090a0a;
+  }
+  .button {
+    display: inline-block;
+    margin: 10px;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    color: #fff;
+    background-color: #28a745;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  .button:hover {
+    background-color: #218838;
+    transform: translateY(-3px);
+  }
+  .no-button {
+    background-color: #dc3545;
+  }
+  .no-button:hover {
+    background-color: #c82333;
+  }
+  #calendar, #food-options, #pizza-game {
+    display: none;
+    margin-top: 20px;
+  }
+  input, button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+  }
+  input {
+    width: 70%;
+  }
+  button {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+  }
+  .food-item {
+    margin: 5px;
+    padding: 10px;
+    background-color: #ff7f50;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    width: 120px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  .food-item:hover {
+    background-color: #e05b2f;
+    transform: translateY(-3px);
+  }
+  #message {
+    margin-top: 20px;
+    font-size: 1.4rem;
+    color: #ffdf91;
+  }
+  .pizza-topping {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px;
+    background-color: #ffa500;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  .pizza-topping:hover {
+    background-color: #e59400;
+    transform: translateY(-3px);
+  }
+  #pizza-preview {
+    margin: 20px auto;
+    background-color: #fff;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  .topping {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ff6347;
+  }
   </style>
 </head>
 <body>
-  <h1>hey idiot,lets meet today?</h1>
-  <p>It's been a while since we chilled together. lets grab some coffee?</p>
-  <a href="#" class="button" onclick="sayYes()">Yes, I'd love to!</a>
-  <a href="#" class="button no-button" onclick="sayNo()">Sorry, maybe later!</a>
-  <div id="response"></div>
+  <div class="container">
+    <h1>Hey, Want to Plan a Hangout? 🌸</h1>
+    <p>Yes yes ik its not a date!</p>
+    <a href="#" class="button" onclick="showCalendar()">Yes, let’s plan!</a>
+    <a href="#" class="button no-button" onclick="sayNo()">No, maybe later!</a>
+
+    <div id="calendar">
+      <h2>Select a Date & Time</h2>
+      <form id="hangoutForm">
+        <label for="date">Choose a Date:</label><br>
+        <input type="date" id="date" name="date" required><br><br>
+        
+        <label for="time">Choose a Time:</label><br>
+        <input type="time" id="time" name="time" required><br><br>
+        
+        <button id="next" type="button" onclick="showFoodOptions()">Next</button>
+      </form>
+    </div>
+
+    <div id="food-options">
+      <h2>What do you feel like eating?🍕🍦🍰☕</h2>
+      <div class="food-item" onclick="startPizzaGame()">Pizza</div>
+      <div class="food-item" onclick="selectFood('Ice Cream')">Ice Cream</div>
+      <div class="food-item" onclick="selectFood('Cheesecake')">Cheesecake</div>
+      <div class="food-item" onclick="selectFood('Coffee')">Coffee</div>
+      <p id="selected-food"></p>
+      <button id="submit" type="button" onclick="submitDetails()">Submit</button>
+    </div>
+
+    <div id="pizza-game">
+      <h2>Let’s Make Your Pizza! 🍕</h2>
+      <div id="pizza-preview"></div>
+      <p>Add your favorite toppings:</p>
+      <div class="pizza-topping" onclick="addTopping('cheese')">Cheese</div>
+      <div class="pizza-topping" onclick="addTopping('pepperoni')">Pepperoni</div>
+      <div class="pizza-topping" onclick="addTopping('mushroom')">Mushroom</div>
+      <div class="pizza-topping" onclick="addTopping('olives')">Olives</div>
+      <button onclick="finishPizza()">Finish Pizza</button>
+    </div>
+
+    <p id="message"></p>
+  </div>
 
   <script>
-    function sayYes() {
-      document.getElementById("response").innerText = "hehehehheheh! you're my fav<3333 🎉";
-      document.getElementById("response").style.display = "block";
+    let selectedFood = "";
+
+    function showCalendar() {
+      document.getElementById('calendar').style.display = 'block';
     }
+
     function sayNo() {
-      document.getElementById("response").innerText = "block. bad nida";
-      document.getElementById("response").style.display = "block";
+      document.getElementById('message').textContent = "No worries, let me know when you're free! 🌻";
+    }
+
+    function showFoodOptions() {
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
+
+      if (date && time) {
+        document.getElementById('calendar').style.display = 'none';
+        document.getElementById('food-options').style.display = 'block';
+      } else {
+        alert("Please select both a date and a time.");
+      }
+    }
+
+    function selectFood(food) {
+      selectedFood = food;
+      if (food === 'Pizza') {
+        startPizzaGame();
+      } else {
+        document.getElementById('selected-food').textContent = `You selected: ${food}`;
+        document.getElementById('submit').style.display = 'inline-block';
+      }
+    }
+
+    function startPizzaGame() {
+      document.getElementById('food-options').style.display = 'none';
+      document.getElementById('pizza-game').style.display = 'block';
+    }
+
+    function addTopping(topping) {
+      const pizza = document.getElementById('pizza-preview');
+      const newTopping = document.createElement('div');
+      newTopping.className = 'topping';
+
+      // Random position for toppings
+      newTopping.style.left = `${Math.random() * 150}px`;
+      newTopping.style.top = `${Math.random() * 150}px`;
+
+      // Topping-specific colors
+      switch (topping) {
+        case 'cheese':
+          newTopping.style.backgroundColor = '#f9d71c';
+          break;
+        case 'pepperoni':
+          newTopping.style.backgroundColor = '#d2222d';
+          break;
+        case 'mushroom':
+          newTopping.style.backgroundColor = '#d4b483';
+          break;
+        case 'olives':
+          newTopping.style.backgroundColor = '#556b2f';
+          break;
+      }
+
+      pizza.appendChild(newTopping);
+    }
+
+    function finishPizza() {
+      document.getElementById('pizza-game').style.display = 'none';
+      document.getElementById('message').textContent = "Your pizza is ready! Can't wait to share it with you! 🍕💖";
+    }
+
+    function submitDetails() {
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
+
+      if (selectedFood) {
+        const details = `Date: ${date}, Time: ${time}, Food: ${selectedFood}`;
+        document.getElementById('message').textContent = `Awesome! I’ve noted the date: ${date}, time: ${time}, and your choice: ${selectedFood}. Can’t wait! 💖`;
+        console.log(details); // Logs the data, optional for tracking
+      } else {
+        alert("Please select something to eat.");
+      }
+
+      // Send data to Google Forms
+      const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSex7C2X9CYPTevT2FTxbYf_7Wve9XHnmXplpXWrbO4spkF8rw/viewform?usp=header"; // Replace with your actual form URL
+      const data = new FormData();
+      data.append("entry.980718735_day", date); // Replace with your actual form field entry ID for the year (or date)
+      data.append("entry.293961461_hour", time); // Replace with your actual form field entry ID for the time
+      data.append("entry.1523166148_sentinel", selectedFood); // Replace with your actual field ID for the food
+
+      fetch(formUrl, {
+        method: 'POST',
+        body: data
+      }).then(response => {
+        console.log("Form submitted successfully:", response);
+      }).catch(error => {
+        console.error("Error submitting form:", error);
+      });
     }
   </script>
 </body>
